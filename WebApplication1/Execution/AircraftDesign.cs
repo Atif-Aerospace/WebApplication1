@@ -23,6 +23,8 @@ namespace WebApplication1.Execution
 
         public void FlopsModel(double SW, double AR, out double Range)
         {
+            Range = 10;
+            return;
             List<string> flopsInputLines = new List<string>();
 
 
