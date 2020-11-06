@@ -25,7 +25,15 @@ namespace WebApplication1.Execution
         {
             List<string> flopsInputLines = new List<string>();
 
-            string fileName = @"..\flops\xAtif.in";
+
+            string bbb = Environment.GetEnvironmentVariable("HOME");
+            string rootPath = "";
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else
+                rootPath = "";
+
+            string fileName = rootPath + @"..\flops\xAtif.in";
             StreamReader file = new StreamReader(fileName);
 
             string line;
