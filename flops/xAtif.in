@@ -1,0 +1,137 @@
+NOISE CALCULATIONS 
+ $OPTION
+   IOPT=1, IANAL=3, ITAKOF=1, ILAND=1, ICOST=1,
+   NOPRO=1, NOISE=1, MPRINT=0,
+ $END
+
+ $WTIN
+  NEW=2, NPF=12, NPT=138,
+  THRSO=25000.00, 
+  FULFMX=+16000.0,
+ $END
+ $FUSEIN
+  NTABR=6, NFABR=4,
+ $END 
+
+ $CONFIN
+  GW=165000.0, DESRNG=+3000.0, VARTH=1.0,
+  SW=1200.00, AR=12.00,
+  TCA=0.1100, TR=0.27, SWEEP=+25.0,
+  HTVC=0.799, VTVC=0.065,
+  VCMN=0.78, CH=39000., 
+ $END
+
+Moderate technology wing
+ $AERIN
+  AITEK=1.5, FLTO=7000., 
+  FMDES=0.8, FCLDES=0.54,
+ $END
+
+Calculate both fare required for a given return on
+investment and return on investment for a given fare
+ $COSTIN
+  NPOD=2, ROI=7., FARE=0.10,
+ $END 
+
+ $ENGDIN
+    IDLE=1, IGENEN=1, MAXCR=1, NGPRT=1,
+    NOX=1,
+ $END
+
+
+ $ENGINE 
+  FTMACH=0.32, FTALT=689., JET=6,
+  IENG=2, IPRINT=0, BPRDES=06.00,
+  OPRDES=40.00, FPRDES=1.45, TETDES=3300.0,
+  YEAR=2017., COSTBL=3.7040, HPEXT=197.39,
+ $END
+
+
+Size aircraft for specified range, fly minimum fuel-to-climb,
+optimum altitude for cruise Mach, and max L/D descent
+ $MISSIN
+  IRW=2,
+  TAXOTM=10., TAKOTM=0.4, TAXITM=10.,
+  ITTFF=1, FWF=-1., RESRFU=1050.0,
+ $END
+START
+CLIMB
+CRUISE
+DESCENT
+END
+
+
+ $TOLIN
+   DELVTO=5.,
+   ARGEF=1.0, ALPRUN=-1.0, WHGT=13.6,
+   TINC=-4.5, CDGEAR=0.00976, ITIME=0, IBAL=1, VROTAT=1.05, TIGEAR=10.,
+   cltom=2.8, CDMTO=.00773, FCDMTO=0.45, ROLLMU=0.02,
+   ALPTO= -4.00, -2.00,  0.00,  2.50,  5.00,  7.50, 10.00, 12.50, 15.00, 16.00,
+   CLTO =  0.15, 0.325,   0.5, 0.675,0.9375,1.1563, 1.375,1.5938,1.8125,   1.9,
+   CDTO = 0.007, 0.009, 0.014, 0.022, 0.034, 0.050, 0.072, 0.100, 0.134, 0.175,
+   ALMXTO=16., ALPROT=10.0, INTHTO=2, THFACT=0.965,
+   DTCT=10.0,
+   clldm=2.8, CDMLD=.0081, FCDMLD=0.46,
+   ALPLD=  -8.0,  -4.0,   0.0,   4.0,   8.0, 12.00,  14.0,  16.0,  18.0,  20.0,
+   CLLD=   -0.1,  0.25,   0.6, 0.975, 1.350, 1.725, 1.913,   2.1,  2.15,  2.11,
+   CDLD=  0.010, 0.008, 0.017, 0.031, 0.033, 0.040, 0.060, 0.097, 0.144, 0.201,
+   ALMXLD=15., INTHLD=2,
+ $END
+
+ $PROIN
+   NPOL=1, NTIME=0, IPCMAX=1,
+ $END
+
+REDUCED-THROTTLE TAKEOFF (TOFL=11000 FT), CUTBACK AT 689 FT
+
+ $SEGIN
+   KEY='ROTATE', NFLAP=1, ENGSCL=0.965,
+ $END
+
+ $SEGIN
+   KEY='LIFT OFF',
+ $END
+
+ $SEGIN
+   KEY='OBSTACLE',
+ $END
+
+ $SEGIN
+   KEY='CHANGE', IFIX=1, VFIX=10., HSTOP=689.,
+ $END
+
+ $SEGIN
+   KEY='CUTBACK',
+ $END
+
+ $SEGIN
+   KEY='LAST', DSTOP=35000.,
+ $END
+
+ $NOISIN
+  IJET=1, IFAN=1, ICORE=1, ITURB=1, IAIRF=1,
+  ISUPP=1, IDOP=1, IGND=1, IATM=1, DELDB=30., HENG=6.,
+  NOB=0, IFOOT=1,
+  FANHUB = 1.9, NBL=36, NVAN = 3, FANDIA = 6.1, TIPMD = 1.2, FANEFF = 0.88,
+  TBNDIA=3,NBLR=88,
+  IFL=1, ISLAT=1, IWING = 1,
+  NDPRT=0, IGEOM=0,
+  IEXH=2,
+  SFUSE=0,
+  INOZ=0, IY9=1, GAMMAC=1.36, GASRC=53.38,
+  IPLUG=0, ISHOCK=1, IFWD=1, ICORR=0,
+  CS=0.9,
+  ARPM=9400,9000,8600,8200,7800,7400,7000,6600,6200,5800,5400,5000,4600,4400,4200
+  ZJSUPP= 19., 19., 19., 19., 19., 19., 19., 19., 19., 19., 19., 19.,
+          19., 19., 19., 19., 19., 19., 19., 19., 19., 19., 19., 19.,
+  SUPPIN= 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+          16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+  SUPPEX= 17., 17., 17., 17., 17., 17., 17., 17., 17., 17., 17., 17.,
+          17., 17., 17., 17., 17., 17., 17., 17., 17., 17., 17., 17.,
+  TSUPP = 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+          16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+  CSUPP = 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+          16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16., 16.,
+
+ $END
+
