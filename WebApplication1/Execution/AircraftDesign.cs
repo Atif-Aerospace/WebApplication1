@@ -36,6 +36,9 @@ namespace WebApplication1.Execution
             string fileName = rootPath + @"\flops\xAtif.in";
             StreamReader file = new StreamReader(fileName);
 
+            Range = 100;
+            return;
+
             string line;
             while ((line = file.ReadLine()) != null)
             {
