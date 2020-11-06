@@ -27,13 +27,13 @@ namespace WebApplication1.Execution
 
 
             string bbb = Environment.GetEnvironmentVariable("HOME");
-            string rootPath = "";
+            string rootPath = "..";
             if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
-                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\repository";
             else
                 rootPath = "";
 
-            string fileName = rootPath + @"..\flops\xAtif.in";
+            string fileName = rootPath + @"\flops\xAtif.in";
             StreamReader file = new StreamReader(fileName);
 
             string line;
