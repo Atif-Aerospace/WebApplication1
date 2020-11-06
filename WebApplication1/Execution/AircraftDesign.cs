@@ -23,8 +23,6 @@ namespace WebApplication1.Execution
 
         public void FlopsModel(double SW, double AR, out double Range)
         {
-            Range = 10;
-            return;
             List<string> flopsInputLines = new List<string>();
 
 
@@ -35,11 +33,8 @@ namespace WebApplication1.Execution
             else
                 rootPath = "";
 
-            string fileName = rootPath + @"\flops\xAtif.in";
+            string fileName = @"C:\home\site\repository\flops\xAtif.in";
             StreamReader file = new StreamReader(fileName);
-
-            Range = 100;
-            return;
 
             string line;
             while ((line = file.ReadLine()) != null)
@@ -65,14 +60,14 @@ namespace WebApplication1.Execution
 
 
             // Create new flops input file
-            File.WriteAllLines(@"..\flops\xAtif_new.in", flopsInputLines);
+            File.WriteAllLines(@"C:\home\site\repository\flops\xAtif_new.in", flopsInputLines);
 
 
 
             // Execute Flops
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
-            proc.StartInfo.WorkingDirectory = @"..\flops";
-            proc.StartInfo.FileName = @"..\flops\xAtif.bat";
+            proc.StartInfo.WorkingDirectory = @"C:\home\site\repository\flops";
+            proc.StartInfo.FileName = @"C:\home\site\repository\flops\xAtif.bat";
             //proc.StartInfo.Arguments = @\"" + this.EXEArgs + "\";
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardError = false;
@@ -95,7 +90,7 @@ namespace WebApplication1.Execution
 
             // Extract output
             List<string> flopsOutputLines = new List<string>();
-            string outputFileName = @"..\flops\xAtif.out";
+            string outputFileName = @"C:\home\site\repository\flops\xAtif.out";
             StreamReader outputFile = new StreamReader(outputFileName);
             while ((line = outputFile.ReadLine()) != null)
             {
