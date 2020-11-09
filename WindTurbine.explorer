@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Version="1">
+  <DataRepository>
+    <Data Name="d" Type="Double" Description="" ParentName="" Min="-Infinity" Value="12.7024" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="v" Type="Double" Description="" ParentName="" Min="-Infinity" Value="13.5293" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="p" Type="Double" Description="" ParentName="" Min="-Infinity" Value="199.7867" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="c" Type="Double" Description="" ParentName="" Min="-Infinity" Value="2537.7626" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="l" Type="Double" Description="" ParentName="" Min="-Infinity" Value="24.2211" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="SW" Type="Double" Description="" ParentName="" Min="-Infinity" Value="0.0000" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="AR" Type="Double" Description="" ParentName="" Min="-Infinity" Value="0.0000" Max="Infinity" DecimalPlaces="4" Unit="" />
+    <Data Name="Range" Type="Double" Description="" ParentName="" Min="-Infinity" Value="0.0000" Max="Infinity" DecimalPlaces="4" Unit="" />
+  </DataRepository>
+  <DataRepositoryAux />
+  <ModelRepository>
+    <Model Name="Power" Type="CSharp" Description="" IsAuxiliary="false" Body="p = d * d * v * v * v / 2000;">
+      <Inputs>
+        <Input Name="d" />
+        <Input Name="v" />
+      </Inputs>
+      <Outputs>
+        <Output Name="p" />
+      </Outputs>
+      <Body>p = d * d * v * v * v / 2000;</Body>
+    </Model>
+    <Model Name="Cost" Type="CSharp" Description="" IsAuxiliary="false" Body="c = p * d;">
+      <Inputs>
+        <Input Name="p" />
+        <Input Name="d" />
+      </Inputs>
+      <Outputs>
+        <Output Name="c" />
+      </Outputs>
+      <Body>c = p * d;</Body>
+    </Model>
+    <Model Name="Life" Type="CSharp" Description="" IsAuxiliary="false" Body="l = 100 / Math.Exp(Math.Sqrt((p + d / 10) / 100));">
+      <Inputs>
+        <Input Name="p" />
+        <Input Name="d" />
+      </Inputs>
+      <Outputs>
+        <Output Name="l" />
+      </Outputs>
+      <Body>l = 100 / Math.Exp(Math.Sqrt((p + d / 10) / 100));</Body>
+    </Model>
+  </ModelRepository>
+  <ModelRepositoryAux />
+  <WorkflowRepository>
+    <Workflow Name="WF_Def" Type="Workflow" Description="" IsAuxiliary="false" ScheduleMode="GroupNonReversibleOnly">
+      <Inputs>
+        <Input Name="d" />
+        <Input Name="v" />
+      </Inputs>
+      <Outputs>
+        <Output Name="p" />
+        <Output Name="c" />
+        <Output Name="l" />
+      </Outputs>
+      <Components>
+        <Model Name="Power" Type="ComputationalModel" />
+        <Model Name="Cost" Type="ComputationalModel" />
+        <Model Name="Life" Type="ComputationalModel" />
+      </Components>
+      <ScheduledComponents>
+        <Model Name="Power" Type="ComputationalModel" />
+        <Model Name="Life" Type="ComputationalModel" />
+        <Model Name="Cost" Type="ComputationalModel" />
+      </ScheduledComponents>
+    </Workflow>
+  </WorkflowRepository>
+  <WorkflowRepositoryAux>
+  </WorkflowRepositoryAux>
+  <StudyRepository>
+  </StudyRepository>
+</Project>

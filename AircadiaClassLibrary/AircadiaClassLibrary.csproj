@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6F9AECB-CC1D-488E-B910-465918A831F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AircadiaClassLibrary</RootNamespace>
+    <AssemblyName>AircadiaClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.MLApp">
+      <HintPath>..\Lib\Interop.MLApp.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="IronPython, Version=2.7.8.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="MWArray, Version=2.17.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\MWArray.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft SQL Server Compact Edition\v4.0\Desktop\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AircadiaComponent.cs" />
+    <Compile Include="AircadiaProject.cs" />
+    <Compile Include="Compilers\CompilationException.cs" />
+    <Compile Include="Compilers\Compiler.cs" />
+    <Compile Include="Data\Data.cs" />
+    <Compile Include="Data\DataExtensions.cs" />
+    <Compile Include="Data\DataTypes.cs" />
+    <Compile Include="Data\Dimension.cs" />
+    <Compile Include="Data\DoubleData.cs" />
+    <Compile Include="Data\DoubleMatrixData.cs" />
+    <Compile Include="Data\DoubleVectorData.cs" />
+    <Compile Include="Data\IntegerData.cs" />
+    <Compile Include="Data\IntegerVectorData.cs" />
+    <Compile Include="Data\MatrixData.cs" />
+    <Compile Include="Data\ScalarData.cs" />
+    <Compile Include="Data\StringData.cs" />
+    <Compile Include="Data\VectorData.cs" />
+    <Compile Include="Deprecated\GASetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deprecated\GASetup.Designer.cs">
+      <DependentUpon>GASetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Distributions\IProbabilityDistribution.cs" />
+    <Compile Include="Distributions\ParameterAttribute.cs" />
+    <Compile Include="ExeManager\DataLocations\RowArray.cs" />
+    <Compile Include="Models\CSharpFunctionModel.cs" />
+    <Compile Include="Models\MatlabTModel.cs" />
+    <Compile Include="Models\ModelPython.cs" />
+    <Compile Include="Models\ModelPythonFile.cs" />
+    <Compile Include="Models\UncertatintyWorkflowModel.cs" />
+    <Compile Include="NotifyPropertyChangedBase.cs" />
+    <Compile Include="Serializers\AssemblyLoader.cs" />
+    <Compile Include="Studies\DOE\CustomFactor.cs" />
+    <Compile Include="Studies\DOE\DesignOfExperiment.cs" />
+    <Compile Include="Studies\Missions\Mission.cs" />
+    <Compile Include="Studies\Optimisation\OptimisationStudy.cs" />
+    <Compile Include="Studies\Optimisation\RobustOptimisationStudy.cs" />
+    <Compile Include="Treatments\Design of Experiment\FullFactorial.cs" />
+    <Compile Include="Distributions\Extensions.cs" />
+    <Compile Include="Distributions\GaussianMixtureDistribution.cs" />
+    <Compile Include="Distributions\NormalDistribution.cs" />
+    <Compile Include="Distributions\ProbabilityDistribution.cs" />
+    <Compile Include="Distributions\ProbabilityDistributionFromSamples.cs" />
+    <Compile Include="Distributions\TirangularDistribution.cs" />
+    <Compile Include="Distributions\UniformDistribution.cs" />
+    <Compile Include="ExecutableComponent.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayFixedLineFixedColumnFixedCountLoaction.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayFixedLineFixedColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayFixedLineRelativeColumnFixedCountLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayFixedLineRelativeColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayRelativeLineFixedColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ArrayRelativeLineRelativeColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\Instructions.cs" />
+    <Compile Include="ExeManager\DataLocations\LocationBase.cs" />
+    <Compile Include="ExeManager\DataLocations\ScalarFixedLineFixedColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ScalarFixedLineRelativeColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ScalarRelativeLineFixedColumnLocation.cs" />
+    <Compile Include="ExeManager\DataLocations\ScalarRelativeLineRelativeColumn.cs" />
+    <Compile Include="ExeManager\ExeModel.cs" />
+    <Compile Include="Models\cModelModelica.cs" />
+    <Compile Include="Models\ICompilable.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\ModelCSharp.cs" />
+    <Compile Include="Models\ModelDotNetDll.cs" />
+    <Compile Include="Models\ModelEXE.cs" />
+    <Compile Include="Models\ModelMatlab.cs" />
+    <Compile Include="Models\ModelMatlabDll.cs" />
+    <Compile Include="Models\ModelWebService.cs" />
+    <Compile Include="Numerics\NumericalMethodOptions.cs" />
+    <Compile Include="Numerics\OptionAttribute.cs" />
+    <Compile Include="Numerics\INumericalMethodWithOptions.cs" />
+    <Compile Include="Numerics\Solvers\Solver.cs" />
+    <Compile Include="Numerics\Optimisers\IMinimizer.cs" />
+    <Compile Include="SensitivityAnalysis\FASTSensitivityAnalyser.cs" />
+    <Compile Include="SensitivityAnalysis\ISensitivityAnalyser.cs" />
+    <Compile Include="Serializers\AircadiaAttributeBasedXmlSerializer.cs" />
+    <Compile Include="Serializers\SerializeAttribute.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\RobustDesignVariable.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\RobustParameter.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\RobustTemplate.cs" />
+    <Compile Include="Treatments\Optimization\SGAOptimizer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializers\AircadiaXmlSerializer.cs" />
+    <Compile Include="Numerics\Solvers\FixedPoint\FixedPointSolver.cs" />
+    <Compile Include="Numerics\Solvers\GaussNewton\GaussNewtonSolver.cs" />
+    <Compile Include="Numerics\Solvers\ISolver.cs" />
+    <Compile Include="Numerics\Solvers\Newton\NewtonOptions.cs" />
+    <Compile Include="Numerics\Solvers\Newton\NewtonSolver.cs" />
+    <Compile Include="Numerics\Solvers\ParticleSwarm\cParticle_swarm.cs" />
+    <Compile Include="Numerics\Solvers\ParticleSwarm\ParticleSwarm.cs" />
+    <Compile Include="Deprecated\DetOptStudy.cs" />
+    <Compile Include="Studies\DOE\Factor.cs" />
+    <Compile Include="Studies\DOE\FullFactorialDOEStudy.cs" />
+    <Compile Include="Studies\DOE\RandomDOEStudy.cs" />
+    <Compile Include="Studies\DOE\StepFactor.cs" />
+    <Compile Include="Studies\Missions\MissionParameter.cs" />
+    <Compile Include="Studies\Missions\MissionSegment.cs" />
+    <Compile Include="Studies\Missions\MissionStudy.cs" />
+    <Compile Include="Deprecated\Result.cs" />
+    <Compile Include="Studies\Study.cs" />
+    <Compile Include="Treatments\Design of Experiment\DesignOfExperiment.cs" />
+    <Compile Include="Treatments\Design of Experiment\LatinHypercube.cs" />
+    <Compile Include="Treatments\Design of Experiment\RandomDoE.cs" />
+    <Compile Include="Treatments\Optimization\SingleObjectiveGeneticAlgorithmOptimiser.cs" />
+    <Compile Include="Treatments\Optimization\SingleObjectiveUnboundedOptimizer.cs" />
+    <Compile Include="Treatments\Robust Optimization\RobustOptimizationUncertaintyPropagationTreatment.cs" />
+    <Compile Include="Treatments\Uncertainty\cTreatment_FAST.cs" />
+    <Compile Include="Treatments\Uncertainty\cRandomVariable.cs" />
+    <Compile Include="Treatments\Uncertainty\cTreatment_MCS.cs" />
+    <Compile Include="Treatments\Missions\MissionTreatment.cs" />
+    <Compile Include="Treatments\Optimization\GeneticAlgorithmOptimiser.cs" />
+    <Compile Include="Treatments\Optimization\MOGAOptimizer.cs" />
+    <Compile Include="Treatments\Numerical Integration\NumericalIntegrationTreatment.cs" />
+    <Compile Include="Numerics\Optimisers\COBYLA\COBYLA.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\Constant.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\Constraint.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\ConstraintTypes.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\DesignVariable.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\DesignVariableTypes.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\Objective.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\ObjectiveType.cs" />
+    <Compile Include="Treatments\Optimization\Formulation\OptimisationTemplate.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Chromosome\Chromosome.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Chromosome\MultiObjectiveChromosome.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Chromosome\SingleObjectiveChromosome.cs" />
+    <Compile Include="Numerics\Optimisers\GA\ConstraintHandlingMethods.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Crossover\CrossoverOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Crossover\CrossoverOprMethods.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Crossover\OnePointCrossoverOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Crossover\SimulatedBinaryCrossoverOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Elitism\ElitismOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Elitism\ElitismOprMethods.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Elitism\ProportionalElitismOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\GAParameters.cs" />
+    <Compile Include="Numerics\Optimisers\GA\GARandom.cs" />
+    <Compile Include="Numerics\Optimisers\GA\GATypes.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Mutation\MutationOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Mutation\MutationOprMethods.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Mutation\PolynomialMutationOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Mutation\SelectiveMutationOpr.cs" />
+    <Compile Include="Treatments\Optimization\MultiObjectiveGeneticAlgorithmOptimiser.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Population\MultiObjectivePopulation.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Population\Population.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Population\SingleObjectivePopulation.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Selection\SelectionOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Selection\SelectionOprMethods.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Selection\TournamentSelectionOpr.cs" />
+    <Compile Include="Numerics\Optimisers\GA\Selection\TournamentSelectionOprWithoutReplacement.cs" />
+    <Compile Include="Treatments\Optimization\NSGAIIOptimiser.cs" />
+    <Compile Include="Treatments\Optimization\Optimiser.cs" />
+    <Compile Include="Numerics\Optimisers\BFGSOptimizer.cs" />
+    <Compile Include="Treatments\Optimization\GaussNewtonOptimizer.cs" />
+    <Compile Include="Treatments\Treatment.cs" />
+    <Compile Include="Treatments\Uncertainty\SensitivityAnalysisTreatment.cs" />
+    <Compile Include="Treatments\Uncertainty\URQTreatment.cs" />
+    <Compile Include="UncertaintyPropagation\FASTPropagator.cs" />
+    <Compile Include="Util\BipartiteGraph.cs" />
+    <Compile Include="Util\ExtensionMethods.cs" />
+    <Compile Include="Util\Graph.cs" />
+    <Compile Include="Util\PolyFit.cs" />
+    <Compile Include="Util\TraversalHelper.cs" />
+    <Compile Include="WorkflowComponent.cs" />
+    <Compile Include="Util\GraphBuilder.cs" />
+    <Compile Include="WorkflowManagement\DependencyAnalysis.cs" />
+    <Compile Include="WorkflowManagement\GuidingReversal.cs" />
+    <Compile Include="WorkflowManagement\IDependencyAnalysis.cs" />
+    <Compile Include="WorkflowManagement\LibishScheduler.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\BipartiteGraph.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\Edge.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\EdgeList.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\GraphNode.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\NArrayTree.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\NArrayTreeNode.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\Node.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\NodeList.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\ObjectCopier.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\CycleInDirectedGraph.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\DepthFirstSearch.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\DepthFirstSearchYogesh.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\HopcroftKarp.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\MaximumMatching.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\MaximumMatchings.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\MaximumMatchings2.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\PerfectMatchings.cs" />
+    <Compile Include="WorkflowManagement\Matching\MethodsStore\TarjanCycleDetect.cs" />
+    <Compile Include="WorkflowManagement\Matching\GraphObjects\Tarjan.cs" />
+    <Compile Include="WorkflowManagement\Matching\Primes\Primes.cs" />
+    <Compile Include="WorkflowManagement\ReversalCombinations.cs" />
+    <Compile Include="WorkflowManagement\WorkflowScheduler.cs" />
+    <Compile Include="Workflows\INumericallyTreatedWorkflow.cs" />
+    <Compile Include="Workflows\IReversableWorkflow.cs" />
+    <Compile Include="UncertaintyPropagation\IUncertaintyPropagator.cs" />
+    <Compile Include="UncertaintyPropagation\UnivariateReducedQuadrature.cs" />
+    <Compile Include="UncertaintyPropagation\MonteCarloSimulation.cs" />
+    <Compile Include="Workflows\Workflow.cs" />
+    <Compile Include="Workflows\WorkflowGlobal.cs" />
+    <Compile Include="Workflows\WorkflowReversedModel.cs" />
+    <Compile Include="Workflows\WorkflowSCC.cs" />
+    <Compile Include="Workflows\WorkflowUncertaintyParametrised.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TextFileManager\ExeModelTextFileManager.csproj">
+      <Project>{c0cd96cd-9027-4b94-b0e5-00bfaad08f08}</Project>
+      <Name>ExeModelTextFileManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Combinatorics">
+      <Version>1.1.0.19</Version>
+    </PackageReference>
+    <PackageReference Include="MathNet.Numerics">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Northwoods.GoWin">
+      <Version>5.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit">
+      <Version>3.11.0</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit.Console">
+      <Version>3.9.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UncertaintyPropagation\FASTSampler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Deprecated\GASetup.resx">
+      <DependentUpon>GASetup.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
