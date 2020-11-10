@@ -36,7 +36,19 @@ namespace WebApplication1.Controllers
 
 
 
-            List<object> parameters = new List<object>();
+
+            string FileName = @"C:\home\site\repository\WindTurbine.explorer";
+            //string FileName = @"C:\Users\s130030\OneDrive - Cranfield University\Desktop\WebApplication1\WindTurbine.explorer";
+
+            AircadiaProject.Initialize("WindTurbine", @"C:\home\site\repository");
+            //AircadiaProject.Initialize("WindTurbine", @"C:\Users\s130030\OneDrive - Cranfield University\Desktop\WebApplication1");
+
+            AircadiaXmlSerializer.OpenProjectXML(FileName);
+
+            AircadiaProject Project = AircadiaProject.Instance;
+
+
+
 
 
             ExecutionModel model = new ExecutionModel();
@@ -44,6 +56,24 @@ namespace WebApplication1.Controllers
             model.Name = (string)(requestBodyJson["Name"]);
             //model.Description = "Add two numbers";
             //model.Uri = "http://127.0.0.1:5000/ExecuteModel";
+
+            Workflow workflow = null;
+            foreach (Workflow wf in Project.WorkflowStore)
+            {
+                if (wf.Name == model.Name)
+                {
+                    //wf.PrepareForExecution();
+                    workflow = wf;
+                    break;
+                }
+            }
+
+
+
+            List<object> parameters = new List<object>();
+
+
+
 
             // Inputs
             List<Data> inputs = new List<Data>();
@@ -57,6 +87,15 @@ namespace WebApplication1.Controllers
                 inputs.Add(data);
             }
             model.Inputs = inputs;
+
+
+            for (int i = 0; i < workflow.ModelDataInputs.Count(); i++)
+                workflow.ModelDataInputs[i].Value = Convert.ToDouble(inputs[i].Value);
+
+
+
+
+
 
             // Outputs
             List<Data> outputs = new List<Data>();
@@ -77,23 +116,9 @@ namespace WebApplication1.Controllers
 
 
 
-            string FileName = @"C:\home\site\repository\WindTurbine.explorer";
+            
 
-            AircadiaProject.Initialize("WindTurbine", @"C:\home\site\repository");
-            AircadiaXmlSerializer.OpenProjectXML(FileName);
-
-            AircadiaProject Project = AircadiaProject.Instance;
-
-            Workflow workflow = null;
-            foreach (Workflow wf in Project.WorkflowStore)
-            {
-                if (wf.Name == model.Name)
-                {
-                    //wf.PrepareForExecution();
-                    workflow = wf;
-                    break;
-                }
-            }
+            
             if (workflow != null)
             {
                 workflow.Execute();
