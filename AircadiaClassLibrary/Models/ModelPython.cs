@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Aircadia.ObjectModel.DataObjects;
 using Aircadia.Services.Serializers;
-using Microsoft.Scripting.Hosting;
+
 
 namespace Aircadia.ObjectModel.Models
 {
@@ -15,8 +15,7 @@ namespace Aircadia.ObjectModel.Models
 
 		private readonly string outputString = "";
 		private readonly string inputString = "";
-		private ScriptEngine engine;
-		private ScriptScope scope;
+
 
 		[DeserializeConstructor]
 		public ModelPython(string name, string description, List<Data> modelDataInputs, List<Data> modelDataOutputs, string code, string parentName = "", string displayName = "") 
@@ -52,17 +51,17 @@ namespace Aircadia.ObjectModel.Models
 
 		public override bool Execute()
 		{
-			foreach (Data data in ModelDataInputs)
-			{
-				scope.SetVariable(data.Name, data.Value);
-			}
+			//foreach (Data data in ModelDataInputs)
+			//{
+			//	scope.SetVariable(data.Name, data.Value);
+			//}
 
-			engine.Execute(Code, scope);
+			//engine.Execute(Code, scope);
 
-			foreach (Data data in ModelDataOutputs)
-			{
-				data.Value = scope.GetVariable(data.Name);
-			}
+			//foreach (Data data in ModelDataOutputs)
+			//{
+			//	data.Value = scope.GetVariable(data.Name);
+			//}
 
 			return true;
 		}
