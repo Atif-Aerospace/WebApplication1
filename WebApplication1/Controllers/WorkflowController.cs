@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
     {
 
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult<ExecutionModel> GetData()
         {
             JObject requestBodyJson = null;

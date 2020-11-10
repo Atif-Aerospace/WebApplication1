@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ModelExecutionController : ControllerBase
     {
-        [HttpGet]
+        [HttpPost]
         public ActionResult<ExecutionModel> GetData()
         {
             JObject requestBodyJson = null;
