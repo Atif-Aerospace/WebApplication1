@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Aircadia.ObjectModel.DataObjects;
-using MathWorks.MATLAB.NET.Arrays;
+
 
 namespace Aircadia.ObjectModel.Models
 {
@@ -15,88 +15,88 @@ namespace Aircadia.ObjectModel.Models
 
 		public override bool Execute()
 		{
-			int nIn = ModelDataInputs.Count;
-			int nOut = ModelDataOutputs.Count;
-			var inputsM = new MWArray[nIn];
+			//int nIn = ModelDataInputs.Count;
+			//int nOut = ModelDataOutputs.Count;
+			//var inputsM = new MWArray[nIn];
 
-			int idx = 0;
-			foreach (Data input in ModelDataInputs)
-			{
-				switch (input)
-				{
-					case DoubleData d:
-						inputsM[idx] = new MWNumericArray((double)d.Value);
-						break;
-					case DoubleVectorData d:
-						inputsM[idx] = new MWNumericArray((double[])d.Value);
-						break;
-					case DoubleMatrixData d:
-						inputsM[idx] = new MWNumericArray((double[,])d.Value);
-						break;
-					case IntegerData d:
-						inputsM[idx] = new MWNumericArray((int)d.Value);
-						break;
-					case IntegerVectorData d:
-						inputsM[idx] = new MWNumericArray((int[])d.Value);
-						break;
-					case StringData d:
-						inputsM[idx] = new MWCharArray(d.Value as string);
-						break;
-					default:
-						break;
-				}
-				idx++;
-			}
+			//int idx = 0;
+			//foreach (Data input in ModelDataInputs)
+			//{
+			//	switch (input)
+			//	{
+			//		case DoubleData d:
+			//			inputsM[idx] = new MWNumericArray((double)d.Value);
+			//			break;
+			//		case DoubleVectorData d:
+			//			inputsM[idx] = new MWNumericArray((double[])d.Value);
+			//			break;
+			//		case DoubleMatrixData d:
+			//			inputsM[idx] = new MWNumericArray((double[,])d.Value);
+			//			break;
+			//		case IntegerData d:
+			//			inputsM[idx] = new MWNumericArray((int)d.Value);
+			//			break;
+			//		case IntegerVectorData d:
+			//			inputsM[idx] = new MWNumericArray((int[])d.Value);
+			//			break;
+			//		case StringData d:
+			//			inputsM[idx] = new MWCharArray(d.Value as string);
+			//			break;
+			//		default:
+			//			break;
+			//	}
+			//	idx++;
+			//}
 
-			var types = new Type[nOut];
-			idx = 0;
-			foreach (Data output in ModelDataOutputs)
-			{
-				switch (output)
-				{
-					case DoubleData d:
-						types[idx] = typeof(double);
-						break;
-					case DoubleVectorData d:
-						types[idx] = typeof(double[]);
-						break;
-					case DoubleMatrixData d:
-						types[idx] = typeof(double[,]);
-						break;
-					case IntegerData d:
-						types[idx] = typeof(int);
-						break;
-					case IntegerVectorData d:
-						types[idx] = typeof(int[]);
-						break;
-					case StringData d:
-						types[idx] = typeof(string);
-						break;
-					default:
-						break;
-				}
-				idx++;
-			}
-			var outputsM = new MWArray[nOut];
+			//var types = new Type[nOut];
+			//idx = 0;
+			//foreach (Data output in ModelDataOutputs)
+			//{
+			//	switch (output)
+			//	{
+			//		case DoubleData d:
+			//			types[idx] = typeof(double);
+			//			break;
+			//		case DoubleVectorData d:
+			//			types[idx] = typeof(double[]);
+			//			break;
+			//		case DoubleMatrixData d:
+			//			types[idx] = typeof(double[,]);
+			//			break;
+			//		case IntegerData d:
+			//			types[idx] = typeof(int);
+			//			break;
+			//		case IntegerVectorData d:
+			//			types[idx] = typeof(int[]);
+			//			break;
+			//		case StringData d:
+			//			types[idx] = typeof(string);
+			//			break;
+			//		default:
+			//			break;
+			//	}
+			//	idx++;
+			//}
+			//var outputsM = new MWArray[nOut];
 
 			
-			try
-			{
-				object[] parameters = new object[] { nOut, outputsM, inputsM };
-				methodInfo.Invoke(classInstance, new object[] { nOut, outputsM, inputsM });
+			//try
+			//{
+			//	object[] parameters = new object[] { nOut, outputsM, inputsM };
+			//	methodInfo.Invoke(classInstance, new object[] { nOut, outputsM, inputsM });
 
-				outputsM = parameters[1] as MWArray[];
-				idx = 0;
-				foreach (object output in MWArray.ConvertToNativeTypes(outputsM, types))
-				{
-					ModelDataOutputs[idx].Value = output;
-					idx++;
-				}
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+			//	outputsM = parameters[1] as MWArray[];
+			//	idx = 0;
+			//	foreach (object output in MWArray.ConvertToNativeTypes(outputsM, types))
+			//	{
+			//		ModelDataOutputs[idx].Value = output;
+			//		idx++;
+			//	}
+			//}
+			//catch (Exception)
+			//{
+			//	return false;
+			//}
 
 			return true;
 		}
