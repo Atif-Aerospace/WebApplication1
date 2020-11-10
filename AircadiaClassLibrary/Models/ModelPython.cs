@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Aircadia.ObjectModel.DataObjects;
 using Aircadia.Services.Serializers;
-using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
 namespace Aircadia.ObjectModel.Models
@@ -41,29 +40,7 @@ namespace Aircadia.ObjectModel.Models
 
 		public override void PrepareForExecution()
 		{
-			try
-			{
-				engine = engine ?? Python.CreateEngine();
-				scope = engine.CreateScope();
-			}
-			catch (Exception ex)
-			{
-				throw new Exception("Failed to start IronPython", ex);
-			}
-
-			try
-			{
-				foreach (Data data in ModelDataInputs)
-				{
-					scope.SetVariable(data.Name, data.Value);
-				}
-
-				engine.Execute(Code, scope);
-			}
-			catch (Exception ex)
-			{
-				throw new Exception("Somethinhg is wrong with the python code", ex);
-			}
+			
 		}
 
 		public static string GenerateSignature(string name, List<Data> inputs, List<Data> outputs)

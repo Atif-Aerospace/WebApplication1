@@ -44,7 +44,7 @@ namespace ExeModelTextFileManager.ExeManager
 		public string FilePath { get; }
 		public string FunctionName { get; }
 
-		public MLApp.MLApp Matlab { get; set; }
+		
 
 		public MatlabTextBasedModel(string filePath, string functionName, List<InstructionsSet> inputInstructions, List<InstructionsSet> outputInstructions)
 			: base(inputInstructions, outputInstructions)
@@ -56,9 +56,7 @@ namespace ExeModelTextFileManager.ExeManager
 
 		protected override void Execute()
 		{
-			Matlab.Execute($"cd {Path.GetDirectoryName(FilePath)}");
-
-			Matlab.Execute($"{FunctionName}();");
+			
 		}
 	}
 

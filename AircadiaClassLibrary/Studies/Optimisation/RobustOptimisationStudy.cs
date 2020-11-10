@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Data;
-using System.Data.SqlServerCe;
 using Aircadia.ObjectModel.DataObjects;
 using Aircadia.ObjectModel.Treatments;
 using Aircadia.ObjectModel.Treatments.Optimisers.Formulation;
@@ -99,223 +98,223 @@ namespace Aircadia.ObjectModel.Studies
 		{
 			bool status = true;
 
-			//((StudiedComponent as Study).Treatment as Treatment_ROP).Counter = 1;
+			////((StudiedComponent as Study).Treatment as Treatment_ROP).Counter = 1;
 
 
-			string databaseFileName = Path.Combine(Project.ProjectPath, "Studies\\" + Name, Name + ".sdf"); // Microsoft SQL server compact edition file
+			//string databaseFileName = Path.Combine(Project.ProjectPath, "Studies\\" + Name, Name + ".sdf"); // Microsoft SQL server compact edition file
 
-			// Create database for optimisation results
-			string connectionString;
-			connectionString = String.Format("Data Source = " + databaseFileName + ";Persist Security Info=False");
+			//// Create database for optimisation results
+			//string connectionString;
+			//connectionString = String.Format("Data Source = " + databaseFileName + ";Persist Security Info=False");
 
 
-			// Create tables
-			var connection = new SqlCeConnection(connectionString);
-			if (connection.State == ConnectionState.Closed)
-			{
-				connection.Open();
-			}
+			//// Create tables
+			//var connection = new SqlCeConnection(connectionString);
+			//if (connection.State == ConnectionState.Closed)
+			//{
+			//	connection.Open();
+			//}
 
-			#region Atif
-			// Create SQL statements to create tables, sqlStatement1 for OptimAllResults and sqlStatement2 for OptimGenResults
-			//            this.Result.TableNames.Add("RobOptimAllResults");
-			//            this.Result.TableNames.Add("RobOptimGenResults");
-			string sqlStatement1 = "create table RobOptimAllResults (";
-			string sqlStatement2 = "create table RobOptimGenResults (";
-			sqlStatement1 += "ID int, ";
+			//#region Atif
+			//// Create SQL statements to create tables, sqlStatement1 for OptimAllResults and sqlStatement2 for OptimGenResults
+			////            this.Result.TableNames.Add("RobOptimAllResults");
+			////            this.Result.TableNames.Add("RobOptimGenResults");
+			//string sqlStatement1 = "create table RobOptimAllResults (";
+			//string sqlStatement2 = "create table RobOptimGenResults (";
+			//sqlStatement1 += "ID int, ";
             
-			sqlStatement2 += "ID int, Category int, ";
-			for (int i = 0; i < robOptTemplate.DesignVariables.Count(); i++)
-			{
-				string columnHeader = robOptTemplate.DesignVariables[i].Name;
-				sqlStatement1 += columnHeader + " ";
-				sqlStatement2 += columnHeader + " ";
-				/*
-				if (this.robOptTemplate.DesignVariables[i].WrappedData is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.DesignVariables[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
-			}
-			for (int i = 0; i < robOptTemplate.Objectives.Count(); i++)
-			{
-				string columnHeader = robOptTemplate.Objectives[i].Name;
+			//sqlStatement2 += "ID int, Category int, ";
+			//for (int i = 0; i < robOptTemplate.DesignVariables.Count(); i++)
+			//{
+			//	string columnHeader = robOptTemplate.DesignVariables[i].Name;
+			//	sqlStatement1 += columnHeader + " ";
+			//	sqlStatement2 += columnHeader + " ";
+			//	/*
+			//	if (this.robOptTemplate.DesignVariables[i].WrappedData is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.DesignVariables[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
+			//}
+			//for (int i = 0; i < robOptTemplate.Objectives.Count(); i++)
+			//{
+			//	string columnHeader = robOptTemplate.Objectives[i].Name;
                 
-				// Loss Function
-				sqlStatement1 += columnHeader + "LF" + " ";
-				sqlStatement2 += columnHeader + "LF" + " ";
-				/*
-				if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
+			//	// Loss Function
+			//	sqlStatement1 += columnHeader + "LF" + " ";
+			//	sqlStatement2 += columnHeader + "LF" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
 
-				// Mean
-				sqlStatement1 += columnHeader + "mean" + " ";
-				sqlStatement2 += columnHeader + "mean" + " ";
-				/*
-				if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
+			//	// Mean
+			//	sqlStatement1 += columnHeader + "mean" + " ";
+			//	sqlStatement2 += columnHeader + "mean" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
 
-				// Variance
-				sqlStatement1 += columnHeader + "var" + " ";
-				sqlStatement2 += columnHeader + "var" + " ";
-				/*
-				if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
-			}
-			for (int i = 0; i < robOptTemplate.Constraints.Count(); i++)
-			{
-				string columnHeader = robOptTemplate.Constraints[i].Name;
+			//	// Variance
+			//	sqlStatement1 += columnHeader + "var" + " ";
+			//	sqlStatement2 += columnHeader + "var" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Objectives[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Objectives[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
+			//}
+			//for (int i = 0; i < robOptTemplate.Constraints.Count(); i++)
+			//{
+			//	string columnHeader = robOptTemplate.Constraints[i].Name;
 
-				// Loss Function
-				sqlStatement1 += columnHeader + "LF" + " ";
-				sqlStatement2 += columnHeader + "LF" + " ";
-				/*
-				if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
+			//	// Loss Function
+			//	sqlStatement1 += columnHeader + "LF" + " ";
+			//	sqlStatement2 += columnHeader + "LF" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
 
-				// Mean
-				sqlStatement1 += columnHeader + "mean" + " ";
-				sqlStatement2 += columnHeader + "mean" + " ";
-				/*
-				if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
+			//	// Mean
+			//	sqlStatement1 += columnHeader + "mean" + " ";
+			//	sqlStatement2 += columnHeader + "mean" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
 
-				// Variance
-				sqlStatement1 += columnHeader + "var" + " ";
-				sqlStatement2 += columnHeader + "var" + " ";
-				/*
-				if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
-				{
-					sqlStatement1 += "int, ";
-					sqlStatement2 += "int, ";
-				}
-				else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
-				{
-				*/
-				sqlStatement1 += "float, ";
-				sqlStatement2 += "float, ";
-				/*
-				}
-				*/
-			}
-			if (robOptTemplate.DesignVariables.Count() + robOptTemplate.Objectives.Count() + robOptTemplate.Constraints.Count() > 0)
-			{
-				sqlStatement1 = sqlStatement1.Remove(sqlStatement1.Length - 2);
-				sqlStatement2 = sqlStatement2.Remove(sqlStatement2.Length - 2);
-			}
-			sqlStatement1 += ")";
-			sqlStatement2 += ")";
+			//	// Variance
+			//	sqlStatement1 += columnHeader + "var" + " ";
+			//	sqlStatement2 += columnHeader + "var" + " ";
+			//	/*
+			//	if ((this.robOptTemplate.Constraints[i].WrappedData) is IntegerData)
+			//	{
+			//		sqlStatement1 += "int, ";
+			//		sqlStatement2 += "int, ";
+			//	}
+			//	else if (this.robOptTemplate.Constraints[i].WrappedData is DoubleData)
+			//	{
+			//	*/
+			//	sqlStatement1 += "float, ";
+			//	sqlStatement2 += "float, ";
+			//	/*
+			//	}
+			//	*/
+			//}
+			//if (robOptTemplate.DesignVariables.Count() + robOptTemplate.Objectives.Count() + robOptTemplate.Constraints.Count() > 0)
+			//{
+			//	sqlStatement1 = sqlStatement1.Remove(sqlStatement1.Length - 2);
+			//	sqlStatement2 = sqlStatement2.Remove(sqlStatement2.Length - 2);
+			//}
+			//sqlStatement1 += ")";
+			//sqlStatement2 += ")";
 
-			// Create SQL statement command for "SQL Server Compact Edition"
-			var command1 = new SqlCeCommand(sqlStatement1, connection);
-			var command2 = new SqlCeCommand(sqlStatement2, connection);
-			// Execute the SQL command
-			try
-			{
-				command1.ExecuteNonQuery();
-				command2.ExecuteNonQuery();
-			}
-			catch (SqlCeException sqlexception)
-			{
-				Console.WriteLine(sqlexception.Message);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-			#endregion Atif
-
-
-			Treatment.Result = ActiveResult;
-
-			//status = this.Treatment.ApplyOn();
-			status = Treatment.ApplyOn(StudiedComponent);
+			//// Create SQL statement command for "SQL Server Compact Edition"
+			//var command1 = new SqlCeCommand(sqlStatement1, connection);
+			//var command2 = new SqlCeCommand(sqlStatement2, connection);
+			//// Execute the SQL command
+			//try
+			//{
+			//	command1.ExecuteNonQuery();
+			//	command2.ExecuteNonQuery();
+			//}
+			//catch (SqlCeException sqlexception)
+			//{
+			//	Console.WriteLine(sqlexception.Message);
+			//}
+			//catch (Exception ex)
+			//{
+			//	Console.WriteLine(ex.Message);
+			//}
+			//#endregion Atif
 
 
-			#region Post Execution
+			//Treatment.Result = ActiveResult;
 
-			/*
-			((cTreatment_ROP)((Study)(this.modsub)).Treatment).Counter = 1;
-
-
+			////status = this.Treatment.ApplyOn();
+			//status = Treatment.ApplyOn(StudiedComponent);
 
 
-			// Drop tables generated by optimiser
-			string sqlText = "DROP TABLE " + "RobOptimAllResults";
-			SqlCeCommand cmd = new SqlCeCommand(sqlText, connection);
-			cmd.ExecuteNonQuery();
-			sqlText = "DROP TABLE " + "RobOptimGenResults";
-			cmd = new SqlCeCommand(sqlText, connection);
-			cmd.ExecuteNonQuery();
-			connection.Close();
-			*/
+			//#region Post Execution
+
+			///*
+			//((cTreatment_ROP)((Study)(this.modsub)).Treatment).Counter = 1;
 
 
 
-			#endregion Post Execution
+
+			//// Drop tables generated by optimiser
+			//string sqlText = "DROP TABLE " + "RobOptimAllResults";
+			//SqlCeCommand cmd = new SqlCeCommand(sqlText, connection);
+			//cmd.ExecuteNonQuery();
+			//sqlText = "DROP TABLE " + "RobOptimGenResults";
+			//cmd = new SqlCeCommand(sqlText, connection);
+			//cmd.ExecuteNonQuery();
+			//connection.Close();
+			//*/
+
+
+
+			//#endregion Post Execution
 
 			return status;
 		}

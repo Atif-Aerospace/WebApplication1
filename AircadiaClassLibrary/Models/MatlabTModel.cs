@@ -11,7 +11,7 @@ namespace Aircadia.ObjectModel.Models
 	public class MatlabTModel : Model
 	{
 		public MatlabTextBasedModel model;
-		private MLApp.MLApp matlab;
+
 
 		[Serialize(Type = SerializationType.Path)]
 		public string FilePath => model.FilePath;
@@ -32,30 +32,7 @@ namespace Aircadia.ObjectModel.Models
 
 		public override void PrepareForExecution()
 		{
-			var matlabType = Type.GetTypeFromProgID("Matlab.Autoserver");
-			if (matlab == null)
-			{
-				matlab = Activator.CreateInstance(matlabType) as MLApp.MLApp;
-				if (matlab == null)
-				{
-					throw new Exception("The MATLAB instance cannot be created");
-				}
-			}
-
-			try
-			{
-				matlab.Execute("clc");
-			}
-			catch (Exception)
-			{
-				matlab = Activator.CreateInstance(matlabType) as MLApp.MLApp;
-				if (matlab == null || matlab?.Visible != 1)
-				{
-					throw new Exception("The MATLAB instance cannot be created");
-				}
-			}
-
-			model.Matlab = matlab;
+			
 		}
 
 		public override bool Execute()

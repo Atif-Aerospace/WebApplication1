@@ -17,8 +17,8 @@ namespace Aircadia.ObjectModel.Models
 
 		private string outputString = "";
 		private string inputString = "";
-		[NonSerialized()]
-		private static MLApp.MLApp matlab;
+
+		
 
 		public static bool ShowConsole {get; set;}
 
@@ -41,58 +41,12 @@ namespace Aircadia.ObjectModel.Models
 
 		public override void PrepareForExecution()
 		{
-			var matlabType = Type.GetTypeFromProgID("Matlab.Autoserver");
-            if (matlabType == null)
-            {
-                throw new Exception("MATLAB is not registered as Automation Server");
-            }
-			if (matlab == null)
-			{
-				matlab = Activator.CreateInstance(matlabType) as MLApp.MLApp;
-				if (matlab == null)
-				{
-					throw new Exception("The MATLAB instance cannot be created");
-				}
-				matlab.Visible = ShowConsole ? 1 : 0;
-			}
-
-			try
-			{
-				matlab.Execute("clc");
-			}
-			catch (Exception)
-			{
-				matlab = Activator.CreateInstance(matlabType) as MLApp.MLApp;
-				if (matlab == null || matlab?.Visible != 1)
-				{
-					throw new Exception("The MATLAB instance cannot be created");
-				}
-				matlab.Visible = ShowConsole ? 1 : 0;
-			}
+			
 		}
 
 		public override bool Execute()
 		{
-			matlab.Execute($"cd {Path.GetDirectoryName(FilePath)}");
-
-			foreach (Data data in ModelDataInputs)
-			{
-				if (data.Value is double d)
-					matlab.PutFullMatrix(data.Name, "base", new double[] { d }, new double[] { 0.0 });
-				if (data.Value is int i)
-					matlab.PutFullMatrix(data.Name, "base", new double[] { i }, new double[] { 0.0 });
-				else if (data.Value is Array arr)
-				{
-					matlab.PutFullMatrix(data.Name, "base", arr as Array, new double[arr.GetLength(0), arr.GetLength(1)]);
-				}
-			}
-
-			matlab.Execute($"[{outputString}] = {FunctionName}({inputString});");
-
-			foreach (Data data in ModelDataOutputs)
-			{
-				data.Value = matlab.GetVariable(data.Name, "base");
-			}
+			
 
 			return true;
 		}
