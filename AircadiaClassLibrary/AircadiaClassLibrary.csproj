@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="AircadiaComponent.cs" />
     <Compile Include="AircadiaProject.cs" />
+    <Compile Include="AircadiaProjectE.cs" />
     <Compile Include="Compilers\CompilationException.cs" />
     <Compile Include="Compilers\Compiler.cs" />
     <Compile Include="Data\Data.cs" />

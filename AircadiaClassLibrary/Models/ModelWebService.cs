@@ -47,7 +47,7 @@ namespace Aircadia.ObjectModel.Models
         async Task Test()
         {
             dynamic jsonObj = new JObject();
-            jsonObj.Name = "FlopsModel"; // this.Name;
+            jsonObj.Name = this.Name; // this.Name;
 
             JArray inp = new JArray();
             foreach (Data data in ModelDataInputs)

@@ -409,7 +409,11 @@ namespace Aircadia.Services.Serializers
 						// Function Name
 						modelElement.Add(new XAttribute("FunctionName", mod.FunctionName));
 						break;
-					default:
+                    case ModelWebService mod:
+                        // End Point
+                        modelElement.Add(new XAttribute("EndPoint", SerializePath(mod.EndPoint)));
+                        break;
+                    default:
 						break;
 				}
 
@@ -981,7 +985,7 @@ namespace Aircadia.Services.Serializers
 					model = new ModelMatlab(name, description, inputDataList, outputDataList, DeserializePath(GetValue(modelElement, "FilePath")), GetValue(modelElement, "FunctionName"));
 					break;
                 case "WebService":
-                    model = new ModelWebService(name, description, inputDataList, outputDataList, "", "");
+                    model = new ModelWebService(name, description, inputDataList, outputDataList, DeserializeLines(GetValue(modelElement, "EndPoint")), "");
                     break;
                 default:
 					break;
